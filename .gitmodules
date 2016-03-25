@@ -1,3 +1,9 @@
 [submodule "roles"]
 	path = roles
 	url = git@github.com:satom9to5/ansible-roles.git
+[submodule "roles/sub/common"]
+	path = roles/sub/common
+	url = git@github.com:satom9to5/ansible-roles-common.git
+[submodule "roles/common"]
+	path = roles/common
+	url = git@github.com:satom9to5/ansible-roles-common.git
