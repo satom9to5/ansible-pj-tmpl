@@ -1,0 +1,8 @@
+mysql_users:
+  - user: "{{ pj_name }}"
+    password: "{{ pj_name }}"
+    host: localhost
+  - user: "{{ pj_name }}"
+    password: "{{ pj_name }}"
+    host: '%'
+

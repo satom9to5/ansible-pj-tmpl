@@ -1,0 +1,9 @@
+- name: MySQL add user
+  tags: 
+    - mysql
+  mysql_user: >
+    name={{ item.user }}
+    password={{ item.password }}
+    host={{ item.host }}
+    priv=*.*:ALL
+  with_items: "{{ mysql_users }}"

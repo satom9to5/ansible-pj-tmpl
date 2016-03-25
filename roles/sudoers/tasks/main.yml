@@ -1,0 +1,6 @@
+- name: copy pj
+  tags:
+    - sudoers
+  template: >
+    src=pj.j2
+    dest="/etc/sudoers.d/{{ pj_name }}"

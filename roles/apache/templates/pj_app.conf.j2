@@ -1,0 +1,35 @@
+Alias /{{ item }} "/product/{{ item }}"
+<FilesMatch "^\.ht">
+    Order allow,deny
+    Deny from all
+    Satisfy All
+</FilesMatch>
+<Directory "/product/{{ item }}">
+    SetEnv ENVIRONMENT {{ pj_environment }}
+    SetEnv APPLICATION_NAME {{ item }}
+    Options FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+
+    EnableMMAP Off
+    EnableSendfile Off
+
+    # index.php を表示させない
+    <IfModule mod_rewrite.c>
+        RewriteEngine On
+        RewriteBase /{{ pj_name }}
+
+	# CSS
+	RewriteCond %{REQUEST_FILENAME} \.css$
+	RewriteRule . /{{ item }}/css_loader.php [L]
+
+	# JS
+	RewriteCond %{REQUEST_FILENAME} \.js$
+	RewriteRule . /{{ item }}/js_loader.php [L]
+
+	# CodeIgniter
+	RewriteCond $1 !^(index\.php|image(_sp)?|css|js|sound|flash(_sp)?|gadget_sandbox\.xml|release_time.php)
+	RewriteRule ^(.*)$ /{{ item }}/index.php/$1 [L]
+    </IfModule>
+</Directory>

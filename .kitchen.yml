@@ -1,0 +1,21 @@
+---
+driver:
+  name: docker
+
+provisioner:
+  name: ansible_playbook
+  hosts: localhost
+  roles_path: roles
+  playbook: pj_setup.yml
+#  ansible_connection: localhost
+
+platforms:
+#  - name: centos-6.4
+  - name: centos-7
+    driver_config:
+      privileged: true
+
+suites:
+  - name: default
+    run_list:
+    attributes:

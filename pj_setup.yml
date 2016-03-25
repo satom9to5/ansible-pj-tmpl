@@ -1,0 +1,2 @@
+- include: common.pj_setup.yml
+- include: pj.pj_setup.yml

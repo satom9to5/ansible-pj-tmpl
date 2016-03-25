@@ -1,0 +1,6 @@
+- name: copy nginx server config file of apache
+  tags:
+   - nginx
+  template: >
+    src=apache.conf.j2
+    dest=/etc/nginx/conf.d/apache.conf

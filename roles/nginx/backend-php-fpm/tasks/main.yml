@@ -1,0 +1,7 @@
+- name: copy nginx server config file of php-fpm
+  tags:
+    - nginx
+    - php-fpm
+  template: >
+    src=php-fpm.conf.j2
+    dest=/etc/nginx/conf.d/php-fpm.conf

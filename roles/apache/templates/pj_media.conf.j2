@@ -1,0 +1,9 @@
+Alias /{{ pj_name }}/media /product/{{ pj_name }}_media
+
+<Directory /product/{{ pj_name }}_media>
+    LimitRequestBody 102400
+    Options FollowSymLinks
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+</Directory>

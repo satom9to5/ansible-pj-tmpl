@@ -1,0 +1,51 @@
+- name: pj_app directory check
+  tags:
+    - apache
+  shell: test -d /product/{{ item }} || mkdir -p /product/{{ item }}
+  register: pj_app_dir_check
+  failed_when: pj_app_dir_check.rc not in [0,1]
+  with_items: pj_app
+
+- name: pj_app conf directory check
+  tags:
+    - apache
+  command: test -d /etc/httpd/conf.d/{{ pj_name }}/
+  register: pj_app_conf_dir_check
+  failed_when: pj_app_conf_dir_check.rc not in [0,1]
+
+- name: pj_app conf directory create
+  tags:
+    - apache
+  when: pj_app_conf_dir_check.rc != 0
+  file: >
+    path=/etc/httpd/conf.d/{{ pj_name }}
+    state=directory
+
+- name: copy Apache VirtualHost config file
+  tags:
+    - apache
+  template: >
+    src=virtualhost.conf.j2
+    dest=/etc/httpd/conf.d/virtualhost.conf
+
+- name: copy Apache pj app config file
+  tags:
+    - apache
+  template: >
+    src=pj_app.conf.j2
+    dest=/etc/httpd/conf.d/{{ pj_name }}/{{ item }}.conf
+  with_items: pj_app
+
+- name: copy Apache pj_admin config file
+  tags:
+    - apache
+  template: >
+    src=pj_admin.conf.j2
+    dest=/etc/httpd/conf.d/{{ pj_name }}/{{ pj_name }}_admin.conf
+
+- name: copy Apache pj_media config file
+  tags:
+    - apache
+  template: >
+    src=pj_media.conf.j2
+    dest=/etc/httpd/conf.d/{{ pj_name }}/{{ pj_name }}_media.conf

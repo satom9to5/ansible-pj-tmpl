@@ -1,0 +1,6 @@
+- name: change PHP display_errors setting
+  tags:
+    - php
+  command: >
+    sed -i 's|^.*display_errors.*|display_errors=On|g' {{ installed_php_dir }}/etc/php.ini
+    removes={{ installed_php_dir }}/etc/php.ini

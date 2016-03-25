@@ -1,0 +1,34 @@
+# upstream Setting
+upstream backend_{{ pj_name }} {
+    server {{ apache_host }}:{{ apache_port }};
+}
+
+server {
+    listen {{ nginx_port }};
+    
+    access_log /var/log/nginx/access.log ltsv;
+    error_log  /var/log/nginx/error.log warn;
+    
+    location /favicon {
+    	empty_gif;
+    	access_log    off;
+    	log_not_found off;
+    }
+    
+    location / {
+    	# 0がキャッシュする
+    	# 1がキャッシュしない
+    	set $do_not_cache 1;
+    
+        # 開発環境はキャッシュ無効化する
+    	if ($uri ~ ^/{{ pj_name }}/(flash|flash_sp|image|image_sp|js|sound)/.*$) {
+    		set $do_not_cache {{ nginx_default_do_not_cache }};
+    	}
+    
+    	proxy_no_cache     $do_not_cache;
+    	proxy_cache_bypass $do_not_cache;
+    	proxy_cache        proxy_cache_zone;
+    
+    	proxy_pass http://backend_{{ pj_name }};
+    }
+}

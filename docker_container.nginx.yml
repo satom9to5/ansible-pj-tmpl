@@ -1,0 +1,7 @@
+- hosts:
+    - docker-test
+  connection: docker
+  roles:
+    - common/nginx/install 
+    - common/nginx/restart 
+

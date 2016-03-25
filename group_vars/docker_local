@@ -1,0 +1,16 @@
+pj_name: hoge_docker
+pj_environment: docker_local
+
+apache_host: localhost
+apache_port: 8880
+
+nginx_host: localhost
+nginx_port: 80
+nginx_default_do_not_cache: 1
+
+php_fpm_user: nginx
+php_fpm_group: nginx
+php_fpm_listen: "/var/run/php-fpm/php-fpm.sock"
+php_fpm_display_errors: on
+
+mysql_version: 5.6

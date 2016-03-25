@@ -1,0 +1,12 @@
+- hosts:
+    - localhost
+  roles:
+    - pj/user 
+    - pj/sudoers 
+    - pj/mysql/add_user 
+    - pj/php/create_symlink 
+    - pj/php/setting 
+#    - pj/apache 
+#    - common/apache/restart 
+    - pj/nginx/backend-php-fpm
+    - common/nginx/restart

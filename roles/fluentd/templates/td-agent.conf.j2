@@ -1,0 +1,103 @@
+####
+## Output descriptions:
+##
+
+# File input
+# read apache logs continuously and tags td.apache.access
+#<source>
+#  type tail
+#  format apache
+#  path /var/log/httpd-access.log
+#  tag td.apache.access
+#</source>
+
+# input apache_access_log
+<source>
+  type tail
+  format /^(?<remote_ip>[^ ]*)\t(?<client>[^ ]*)\t(?<user>[^ ]*)\t(?<request_time>.*)\t(?<method>[^ ]*) (?<uri>[^ ]*) (?<protocol>[^ ]*)\t(?<status>[^ ]*)\t(?<res_size>[^ ]*)\t(?<response_time>[^ ]*)\t(?<agent>.*)$/
+  time_format %d/%b/%Y:%H:%M:%S %z
+  path /var/log/httpd/access_log
+  pos_file /var/log/td-agent/access_log.pos
+  tag log_access
+</source>
+
+# input apache_error_log
+<source>
+  type tail
+  format apache_error
+  path /var/log/httpd/error_log
+  pos_file /var/log/td-agent/error_log.pos
+  tag log_error
+</source>
+
+# input app_error_log
+<source>
+  type tail
+  format /^(?<request_time>.*) \[(?<uri>[^ ]*)\]\[(?<method>[^ ]*)\] viewer_id\[(?<viewer_id>[0-9]*)\] (?<message>.*)$/
+  path {{ pj_log_path }}*%Y%m%d.error.log
+  pos_file /var/log/td-agent/app_error_log.pos
+  tag app_log_error
+</source>
+
+
+
+# File output
+# match tag=local.** and write to file
+#<match local.**>
+#  type file
+#  path /var/log/td-agent/access
+#</match>
+
+# apache_access_log output
+<match log_access>
+  type elasticsearch
+  host localhost
+  port 9200
+  type_name access_log
+  logstash_format true
+  logstash_prefix apache_access
+  logstash_dateformat %Y%m%d
+
+  buffer_type memory
+  buffer_chunk_limit 100m
+  buffer_queue_limit 10
+  flush_interval 5s
+  retry_limit 5
+  retry_wait 10s
+</match>
+
+# apache_error_log output
+<match log_error>
+  type elasticsearch
+  host localhost
+  port 9200
+  type_name error_log
+  logstash_format true
+  logstash_prefix apache_error
+  logstash_dateformat %Y%m%d
+
+  buffer_type memory
+  buffer_chunk_limit 100m
+  buffer_queue_limit 10
+  flush_interval 5s
+  retry_limit 5
+  retry_wait 10s
+</match>
+
+# app_error_log output
+<match app_log_error>
+  type elasticsearch
+  host localhost
+  port 9200
+  type_name app_error_log
+  logstash_format true
+  logstash_prefix app_log_error
+  logstash_dateformat %Y%m%d
+
+  buffer_type memory
+  buffer_chunk_limit 100m
+  buffer_queue_limit 10
+  flush_interval 5s
+  retry_limit 5
+  retry_wait 10s
+</match>
