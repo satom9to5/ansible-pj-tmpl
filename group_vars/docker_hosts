@@ -1,0 +1,9 @@
+pj_name: pj
+
+nginx_envs:
+  - S3_BUCKET_NAME
+  - AWS_ACCESS_KEY_ID
+  - AWS_SECRET_ACCESS_KEY
+
+#nginx_s3_upload_file_path: image
+#nginx_s3_upload_endpoint: "/v1/{{ nginx_s3_upload_file_path }}"

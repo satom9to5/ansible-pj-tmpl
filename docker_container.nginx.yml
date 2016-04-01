@@ -3,5 +3,6 @@
   connection: docker
   roles:
     - common/nginx/install 
+    - setup/nginx/backend-golang
     - common/nginx/restart 
 

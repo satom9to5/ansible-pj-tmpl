@@ -1,0 +1,14 @@
+server {
+  listen 80;
+  server_name _;
+
+{% if nginx_s3_upload_file_path != "" %}
+  include /etc/nginx/conf.d/location/s3upload.conf;
+{% endif %}
+
+  location / {
+    include /etc/nginx/conf.d/location/fileupload.conf;
+
+    proxy_pass http://{{ pj_name }}:9000;
+  }
+}

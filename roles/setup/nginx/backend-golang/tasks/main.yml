@@ -1,0 +1,7 @@
+- name: copy nginx server config file of golang
+  tags:
+    - nginx
+    - golang
+  template: >
+    src=golang.conf.j2
+    dest=/etc/nginx/conf.d/{{ pj_name }}.conf

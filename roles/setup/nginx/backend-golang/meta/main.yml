@@ -1,0 +1,3 @@
+dependencies:
+  - { role: common/nginx/aws/s3 }
+  - { role: common/nginx/location/fileupload }
