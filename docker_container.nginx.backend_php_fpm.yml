@@ -1,0 +1,8 @@
+- hosts:
+    - docker-test
+  connection: docker
+  roles:
+    - common/nginx/install 
+    - setup/nginx/backend-php-fpm
+    - common/nginx/restart 
+

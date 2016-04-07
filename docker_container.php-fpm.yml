@@ -1,0 +1,5 @@
+- hosts:
+    - docker-test
+  connection: docker
+  roles:
+    - common/php/install 
