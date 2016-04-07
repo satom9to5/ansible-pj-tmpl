@@ -1,0 +1,1 @@
+nginx_pj_root: "/var/www/html/{{ pj_name }}"
