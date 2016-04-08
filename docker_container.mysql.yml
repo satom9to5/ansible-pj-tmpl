@@ -1,0 +1,7 @@
+- hosts:
+    - docker-test
+  connection: docker
+  roles:
+    - common/mysql/install 
+    - common/mysql/setting 
+    - common/mysql/restart 
