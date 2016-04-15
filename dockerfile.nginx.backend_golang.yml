@@ -2,6 +2,6 @@
     - localhost
   connection: local
   roles:
-    - { role: setup/nginx/backend-golang, nginx_daemon: "off" }
+    - setup/nginx/backend-golang
     - common/supervisor/nginx
 
