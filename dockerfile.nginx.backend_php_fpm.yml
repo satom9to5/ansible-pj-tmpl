@@ -1,0 +1,7 @@
+- hosts:
+    - localhost
+  connection: local
+  roles:
+    - { role: setup/nginx/backend-golang, nginx_daemon: "off" }
+    - common/supervisor/nginx
+
