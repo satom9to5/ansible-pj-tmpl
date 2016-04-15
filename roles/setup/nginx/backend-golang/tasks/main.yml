@@ -2,7 +2,6 @@
   tags:
     - nginx
     - golang
-    - test
   template: >
     src=golang.conf.j2
     dest=/etc/nginx/conf.d/{{ pj_name }}.conf
