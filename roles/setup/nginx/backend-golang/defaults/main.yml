@@ -1,1 +1,2 @@
 nginx_pj_root: "/var/www/html/{{ pj_name }}"
+nginx_pj_upstream_hostnum: 0
