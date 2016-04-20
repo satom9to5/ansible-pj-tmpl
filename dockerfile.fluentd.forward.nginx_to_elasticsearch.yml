@@ -1,0 +1,7 @@
+- hosts:
+    - localhost
+  connection: local
+  roles:
+    - common/supervisor/fluentd
+    - common/fluentd/config/input/forward
+    - common/fluentd/settings/nginx/output/elasticsearch

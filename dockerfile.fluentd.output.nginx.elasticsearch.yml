@@ -1,6 +1,0 @@
-- hosts:
-    - localhost
-  connection: local
-  roles:
-    - common/supervisor/fluentd
-    - common/fluentd/settings/nginx/output
