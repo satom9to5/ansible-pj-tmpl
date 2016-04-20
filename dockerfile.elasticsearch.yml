@@ -2,5 +2,5 @@
     - localhost
   connection: local
   roles:
-    - common/supervisor/elasticsearch
+    - common/supervisor/elasticsearch/elasticsearch
     - common/elasticsearch/plugins/elasticsearch-head
