@@ -1,0 +1,6 @@
+- hosts:
+    - localhost
+  connection: local
+  roles:
+    - setup/nginx/develop-golang
+    - common/supervisor/nginx

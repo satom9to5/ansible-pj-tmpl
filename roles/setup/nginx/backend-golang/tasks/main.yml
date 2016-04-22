@@ -1,7 +1,15 @@
-- name: copy nginx server config file of golang
+- name: copy nginx upstream config file of golang
   tags:
     - nginx
     - golang
   template: >
-    src=golang.conf.j2
-    dest=/etc/nginx/conf.d/{{ pj_name }}.conf
+    src=upstream.golang.conf.j2
+    dest=/etc/nginx/conf.d/upstream/{{ pj_name }}.conf
+
+- name: copy nginx location config file of golang
+  tags:
+    - nginx
+    - golang
+  template: >
+    src=location.golang.conf.j2
+    dest=/etc/nginx/conf.d/location/{{ pj_name }}.conf

@@ -1,0 +1,3 @@
+dependencies:
+  - { role: common/nginx/service/elasticsearch }
+  - { role: common/nginx/service/kibana }

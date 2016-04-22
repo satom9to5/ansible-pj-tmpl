@@ -1,0 +1,4 @@
+dependencies:
+  - { role: setup/nginx/backend-golang }
+  - { role: common/nginx/service/elasticsearch }
+  - { role: common/nginx/service/kibana }

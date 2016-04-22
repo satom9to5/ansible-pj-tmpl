@@ -1,0 +1,9 @@
+upstream @upstream_{{ pj_name }} {
+{% if nginx_pj_upstream_hostnum | int > 0 %}
+{% for num in range(1, nginx_pj_upstream_hostnum | int + 1) %}
+  server {{ pj_name }}{{ num }}:9000;
+{% endfor %}
+{% else %}
+  server {{ pj_name }}:9000;
+{% endif %}
+}

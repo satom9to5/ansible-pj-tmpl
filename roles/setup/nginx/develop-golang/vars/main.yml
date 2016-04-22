@@ -1,0 +1,7 @@
+nginx_root: "/var/www/html/{{ pj_name }}"
+nginx_location_confs:
+  - "{{ pj_name }}"
+  - elasticsearch
+  - kibana
+nginx_elasticsearch_host: elasticsearch
+nginx_kibana_location: "/kibana"
