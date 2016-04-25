@@ -4,4 +4,5 @@ nginx_location_confs:
   - kibana
   - "{{ pj_name }}"
 nginx_elasticsearch_host: elasticsearch
+nginx_kibana_host: kibana
 nginx_kibana_location: "/kibana"

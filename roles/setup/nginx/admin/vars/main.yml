@@ -2,4 +2,5 @@ nginx_location_confs:
   - elasticsearch
   - kibana
 nginx_elasticsearch_host: elasticsearch
+nginx_kibana_host: kibana
 nginx_kibana_location: "/kibana"
