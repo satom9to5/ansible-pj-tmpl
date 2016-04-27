@@ -1,0 +1,4 @@
+dependencies:
+  - { role: common/fluentd/settings/nginx/input }
+  - { role: common/fluentd/config/filter/grep }
+  - { role: common/fluentd/settings/nginx/output/forward }

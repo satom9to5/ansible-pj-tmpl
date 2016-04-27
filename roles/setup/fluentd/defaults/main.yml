@@ -1,2 +1,0 @@
-pj_root_path: "/product/{{ pj_name }}/"
-pj_log_path: "{{ pj_root_path }}codeigniter/application/logs/"
