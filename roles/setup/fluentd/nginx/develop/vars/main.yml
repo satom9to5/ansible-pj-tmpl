@@ -2,4 +2,4 @@ fluentd_filter_grep_configs:
   - tag_name: nginx.access_log
     exclude:
       - name: path
-        pattern: (^/(elasticsearch|kibana)|\.(js|css|jpe?g|gif|png)$)
+        pattern: (^/(elasticsearch|kibana)|\.(js|css|jpe?g|gif|png|svg)$)
