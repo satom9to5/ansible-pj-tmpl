@@ -1,0 +1,25 @@
+log_format ltsv	
+    'host_ip:' '$remote_addr'
+    '\t' 'server_ip:' '$server_addr'
+    '\t' 'host:' '$host'
+    '\t' 'time:' '$time_iso8601'
+    '\t' 'unixtime:' '$msec'
+    '\t' 'scheme:' '$scheme'
+    '\t' 'method:' '$request_method'
+    '\t' 'path:' '$request_uri'
+    '\t' 'uri:' '$uri'
+    '\t' 'query:' '$args'
+    '\t' 'status:' '$status'
+    '\t' 'size:' '$body_bytes_sent'
+    '\t' 'referer:' '$http_referer'
+    '\t' 'agent:' '$http_user_agent'
+    '\t' 'response_time:' '$request_time'
+    '\t' 'cookie:' '$http_cookie'
+    '\t' 'set_cookie:' '$sent_http_set_cookie'
+    '\t' 'authorization:' '$http_authorization'
+    '\t' 'device_id:' '$http_device_id'
+    '\t' 'lat:' '$http_lat'
+    '\t' 'lng:' '$http_lng'
+    ;
+
+access_log  /var/log/nginx/access.log  ltsv;

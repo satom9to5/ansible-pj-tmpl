@@ -1,0 +1,8 @@
+- name: nginx app log conf file copy
+  tags:
+    - nginx
+  template: >
+    src=log.conf.j2
+    dest=/etc/nginx/log.conf
+    mode=0755
+
