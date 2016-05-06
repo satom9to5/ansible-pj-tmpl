@@ -1,0 +1,6 @@
+- hosts:
+    - localhost
+  connection: local
+  roles:
+    - common/supervisor/fluentd
+    - setup/fluentd/app/develop
