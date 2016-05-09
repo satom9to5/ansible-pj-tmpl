@@ -1,0 +1,3 @@
+nginx_root: "/var/www/html/{{ pj_name }}"
+nginx_location_confs:
+  - "{{ pj_name }}"

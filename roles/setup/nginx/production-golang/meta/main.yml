@@ -1,0 +1,3 @@
+dependencies:
+  - { role: setup/nginx/backend-golang }
+  - { role: setup/nginx/app_log }

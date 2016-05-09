@@ -2,6 +2,6 @@
     - localhost
   connection: local
   roles:
-    - setup/nginx/backend-golang
+    - setup/nginx/production-golang
     - common/supervisor/nginx
 
