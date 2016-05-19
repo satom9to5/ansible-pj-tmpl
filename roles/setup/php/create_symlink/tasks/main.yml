@@ -2,7 +2,7 @@
   tags:
     - php
   shell: |
-    source /etc/profile.d/anyenv.sh
+    source /etc/profile.d/proglang.sh
     ln -s `which php` /usr/local/bin/php
   register: php_symlink_create_check
   failed_when: php_symlink_create_check.rc not in [0,1]

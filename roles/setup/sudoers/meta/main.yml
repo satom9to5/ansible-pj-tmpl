@@ -1,2 +1,2 @@
 dependencies:
-  - { role: setup/pj }
+  - { role: setup/app }

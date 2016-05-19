@@ -5,7 +5,7 @@ Alias /{{ item }} "/product/{{ item }}"
     Satisfy All
 </FilesMatch>
 <Directory "/product/{{ item }}">
-    SetEnv ENVIRONMENT {{ pj_environment }}
+    SetEnv ENVIRONMENT {{ app_environment }}
     SetEnv APPLICATION_NAME {{ item }}
     Options FollowSymLinks
     AllowOverride All
@@ -18,7 +18,7 @@ Alias /{{ item }} "/product/{{ item }}"
     # index.php を表示させない
     <IfModule mod_rewrite.c>
         RewriteEngine On
-        RewriteBase /{{ pj_name }}
+        RewriteBase /{{ app_name }}
 
 	# CSS
 	RewriteCond %{REQUEST_FILENAME} \.css$

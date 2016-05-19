@@ -1,8 +1,8 @@
-pj_app:
-  - "{{ pj_name }}"
-  - "{{ pj_name }}_branch"
-  - "{{ pj_name }}_branch2"
-  - "{{ pj_name }}_branch3"
-#  - "{{ pj_name }}_branch4"
-#  - "{{ pj_name }}_branch5"
-#  - "{{ pj_name }}_branch6"
+app_branches:
+  - "{{ app_name }}"
+  - "{{ app_name }}_branch"
+  - "{{ app_name }}_branch2"
+  - "{{ app_name }}_branch3"
+#  - "{{ app_name }}_branch4"
+#  - "{{ app_name }}_branch5"
+#  - "{{ app_name }}_branch6"

@@ -1,6 +1,6 @@
-- name: copy pj
+- name: copy app
   tags:
     - sudoers
   template: >
-    src=pj.j2
-    dest="/etc/sudoers.d/{{ pj_name }}"
+    src=app.j2
+    dest="/etc/sudoers.d/{{ app_name }}"

@@ -13,24 +13,24 @@ server {
 
     location ~ \.css$ {
         set $do_not_cache {{ nginx_default_do_not_cache }};
-        rewrite ^.*$ /{{ pj_name }}/css_loader.php;
+        rewrite ^.*$ /{{ app_name }}/css_loader.php;
     }
 
     location ~ \.js$ {
         set $do_not_cache {{ nginx_default_do_not_cache }};
-        rewrite ^.*$ /{{ pj_name }}/js_loader.php;
+        rewrite ^.*$ /{{ app_name }}/js_loader.php;
     }
 
     location / {
-        try_files $uri /{{ pj_name }}/index.php?$uri&$args;
+        try_files $uri /{{ app_name }}/index.php?$uri&$args;
     }
 
     location ~ \.php$ {
         fastcgi_pass         unix:{{ php_fpm_listen }}; 
         fastcgi_index        index.php;
         fastcgi_param        SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-        fastcgi_param        APPLICATION_NAME {{ pj_name }};
-        fastcgi_param        ENVIRONMENT      {{ pj_environment }};
+        fastcgi_param        APPLICATION_NAME {{ app_name }};
+        fastcgi_param        ENVIRONMENT      {{ app_environment }};
         fastcgi_read_timeout 60;
         fastcgi_send_timeout 60;
         include fastcgi_params;

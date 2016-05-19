@@ -1,8 +1,8 @@
-nginx_root: "/var/www/html/{{ pj_name }}"
+nginx_root: "/var/www/html/{{ app_name }}"
 nginx_location_confs:
   - elasticsearch
   - kibana
-  - "{{ pj_name }}"
+  - "{{ app_name }}"
 nginx_elasticsearch_host: elasticsearch
 nginx_kibana_host: kibana
 nginx_kibana_location: "/kibana"

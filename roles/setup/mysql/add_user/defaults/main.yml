@@ -1,8 +1,8 @@
 mysql_users:
-  - user: "{{ pj_name }}"
-    password: "{{ pj_name }}"
+  - user: "{{ app_name }}"
+    password: "{{ app_name }}"
     host: localhost
-  - user: "{{ pj_name }}"
-    password: "{{ pj_name }}"
+  - user: "{{ app_name }}"
+    password: "{{ app_name }}"
     host: '%'
 

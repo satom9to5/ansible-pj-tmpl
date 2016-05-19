@@ -1,4 +1,4 @@
-nginx_root: "/var/www/html/{{ pj_name }}"
-nginx_pj_upstream_hostnum: 0
+nginx_root: "/var/www/html/{{ app_name }}"
+nginx_app_upstream_hostnum: 0
 nginx_location_confs:
-  - "{{ pj_name }}"
+  - "{{ app_name }}"

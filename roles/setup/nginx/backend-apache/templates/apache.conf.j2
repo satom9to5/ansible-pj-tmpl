@@ -1,5 +1,5 @@
 # upstream Setting
-upstream backend_{{ pj_name }} {
+upstream backend_{{ app_name }} {
     server {{ apache_host }}:{{ apache_port }};
 }
 
@@ -21,7 +21,7 @@ server {
     	set $do_not_cache 1;
     
         # 開発環境はキャッシュ無効化する
-    	if ($uri ~ ^/{{ pj_name }}/(flash|flash_sp|image|image_sp|js|sound)/.*$) {
+    	if ($uri ~ ^/{{ app_name }}/(flash|flash_sp|image|image_sp|js|sound)/.*$) {
     		set $do_not_cache {{ nginx_default_do_not_cache }};
     	}
     
@@ -29,6 +29,6 @@ server {
     	proxy_cache_bypass $do_not_cache;
     	proxy_cache        proxy_cache_zone;
     
-    	proxy_pass http://backend_{{ pj_name }};
+    	proxy_pass http://backend_{{ app_name }};
     }
 }

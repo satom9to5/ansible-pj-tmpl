@@ -4,7 +4,7 @@
     - golang
   template: >
     src=upstream.golang.conf.j2
-    dest=/etc/nginx/conf.d/upstream/{{ pj_name }}.conf
+    dest=/etc/nginx/conf.d/upstream/{{ app_name }}.conf
 
 - name: copy nginx location config file of golang
   tags:
@@ -12,4 +12,4 @@
     - golang
   template: >
     src=location.golang.conf.j2
-    dest=/etc/nginx/conf.d/location/{{ pj_name }}.conf
+    dest=/etc/nginx/conf.d/location/{{ app_name }}.conf
