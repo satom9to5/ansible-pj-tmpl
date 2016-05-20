@@ -1,0 +1,2 @@
+dependencies:
+  - { role: common/fluentd/settings/nginx/output/elasticsearch }

@@ -1,0 +1,9 @@
+fluentd_revel_elasticsearch_configs:
+  - tag_name: "{{ app_name }}.sql_log"
+  - tag_name: "{{ app_name }}.info_log"
+  - tag_name: "{{ app_name }}.warn_log"
+  - tag_name: "{{ app_name }}.error_log"
+fluentd_app_elasticsearch_configs: 
+  - "{{ fluentd_nginx_elasticsearch_configs }}"
+  - "{{ fluentd_revel_elasticsearch_configs }}"
+fluentd_elasticsearch_host: "#{ENV['FLUENTD_ELASTICSEARCH_HOST']}"

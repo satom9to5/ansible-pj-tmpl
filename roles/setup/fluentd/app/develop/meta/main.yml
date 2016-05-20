@@ -1,3 +1,0 @@
-dependencies:
-  - { role: common/fluentd/settings/golang/revel/input }
-  - { role: setup/fluentd/nginx/develop }

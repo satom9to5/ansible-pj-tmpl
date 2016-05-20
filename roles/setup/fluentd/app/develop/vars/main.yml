@@ -1,3 +1,0 @@
-fluentd_tail_configs:
-  - "{{ fluentd_nginx_tail_configs }}"
-  - "{{ fluentd_revel_tail_configs }}"
