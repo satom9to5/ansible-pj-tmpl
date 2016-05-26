@@ -4,4 +4,4 @@
   roles:
     - common/supervisor/fluentd
     - common/fluentd/config/input/forward
-    - { role: setup/fluentd/app/develop/output/elasticsearch, fluentd_elasticsearch_configs: "{{ fluentd_app_elasticsearch_configs }}" }
+    - setup/fluentd/app/develop/output/elasticsearch

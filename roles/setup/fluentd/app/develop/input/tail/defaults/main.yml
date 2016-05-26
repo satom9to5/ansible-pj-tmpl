@@ -1,15 +1,15 @@
 fluentd_revel_tail_configs:
   - tag_name: "{{ app_name }}.sql_log"
-    path: "{{ revel_log_path }}/{{ app_name }}.*.sql_log"
+    path: "{{ revel_log_path }}/{{ app_name }}.*.sql.log"
     format: ltsv
   - tag_name: "{{ app_name }}.info_log"
-    path: "{{ revel_log_path }}/{{ app_name }}.*.info_log"
+    path: "{{ revel_log_path }}/{{ app_name }}.*.info.log"
     format: ltsv
   - tag_name: "{{ app_name }}.warn_log"
-    path: "{{ revel_log_path }}/{{ app_name }}.*.warn_log"
+    path: "{{ revel_log_path }}/{{ app_name }}.*.warn.log"
     format: ltsv
   - tag_name: "{{ app_name }}.error_log"
-    path: "{{ revel_log_path }}/{{ app_name }}.*.error_log"
+    path: "{{ revel_log_path }}/{{ app_name }}.*.error.log"
     format: ltsv
 fluentd_app_tail_configs:
   - "{{ fluentd_nginx_tail_configs }}"

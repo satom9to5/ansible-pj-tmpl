@@ -1,2 +1,3 @@
 dependencies:
   - { role: common/fluentd/settings/nginx/output/elasticsearch }
+  - { role: common/fluentd/settings/nginx/output/elasticsearch, fluentd_elasticsearch_configs: "{{ fluentd_app_elasticsearch_configs }}" }
