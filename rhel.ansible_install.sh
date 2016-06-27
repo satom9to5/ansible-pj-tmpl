@@ -3,8 +3,13 @@
 ANSIBLE_VERSION=2.1.0.0
 ANSIBLE_FULLNAME=ansible-${ANSIBLE_VERSION}
 
+[ `which wget` ] || yum install -y wget
 wget http://releases.ansible.com/ansible/${ANSIBLE_FULLNAME}.tar.gz -P /tmp/
 tar xvzf /tmp/${ANSIBLE_FULLNAME}.tar.gz -C /tmp/
-[ `which pip` ] || yum install -y python-pip
+[ `which gcc` ] || yum install -y gcc
+if [ ! `which pip` ]; then
+    yum install -y epel-release libffi-devel
+    yum install -y python-pip
+fi
 pip install /tmp/${ANSIBLE_FULLNAME}
 rm -rf /tmp/${ANSIBLE_FULLNAME}*
