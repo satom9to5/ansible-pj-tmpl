@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ANSIBLE_VERSION=2.0.1.0
+ANSIBLE_VERSION=2.1.0.0
 ANSIBLE_FULLNAME=ansible-${ANSIBLE_VERSION}
 
 wget http://releases.ansible.com/ansible/${ANSIBLE_FULLNAME}.tar.gz -P /tmp/
