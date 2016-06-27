@@ -4,7 +4,7 @@ IS_PJ_SETUP=0
 [ -n "$1" ] && IS_PJ_SETUP=1
 
 if ! [ `which ansible` ]; then
-  sudo sh $(cd $(dirname $0) && pwd)/ansible_install.sh
+  sudo sh $(cd $(dirname $0) && pwd)/rhel.ansible_install.sh
 fi
 
 ANSIBLE_BASE_DIR=/vagrant/ansible
