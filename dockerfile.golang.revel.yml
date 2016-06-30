@@ -3,3 +3,4 @@
   connection: local
   roles:
     - common/golang/package/revel
+    - common/supervisor/golang/revel
