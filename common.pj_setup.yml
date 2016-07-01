@@ -10,10 +10,11 @@
     - common/git/install 
     - common/git/git_flow 
     - common/tmux 
-    - common/sudoers 
+    - common/sudoers/install
+    - common/sudoers/setting/requiretty
+    - common/sudoers/setting/add_secure_path
 #    - common/gdal 
     - common/mysql/install 
-    - common/mysql/setting 
     - common/mysql/restart 
     - common/percona/toolkit 
     - common/memcached
@@ -58,6 +59,6 @@
 #    - common/apache/restart 
     - common/nginx/nginx-build 
     - common/nginx/install 
-    - common/nginx/conf/elasticsearch
+    - common/nginx/service/elasticsearch
     - common/nginx/restart 
     - common/fluentd/install 
