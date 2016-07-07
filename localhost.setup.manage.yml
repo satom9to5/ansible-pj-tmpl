@@ -1,0 +1,14 @@
+- hosts:
+    - localhost
+  connection: local
+  roles:
+    - common/basic/base
+    - common/basic/shell
+    - common/basic/archive
+    - common/basic/compile
+    - common/basic/network
+    - common/basic/mail
+    - common/basic/system
+    - common/vim
+    - common/mysql/client
+    - common/redis
