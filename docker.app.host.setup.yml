@@ -1,0 +1,13 @@
+- hosts:
+    - localhost
+  roles:
+    - common/basic/base
+    - common/basic/shell
+    - common/basic/archive
+    - common/basic/compile
+    - common/basic/network
+    - common/basic/system
+    - common/vim
+    - common/git/install
+    - common/docker/engine
+    - common/docker/compose
