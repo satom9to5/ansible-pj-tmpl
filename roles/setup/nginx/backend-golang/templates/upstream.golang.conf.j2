@@ -1,9 +1,5 @@
 upstream @upstream_{{ app_name }} {
-{% if nginx_app_upstream_hostnum | int > 0 %}
-{% for num in range(1, nginx_app_upstream_hostnum | int + 1) %}
-  server {{ app_name }}{{ num }}:9000;
+{% for nginx_backend_golang_server in nginx_backend_golang_servers %}
+  server {{ nginx_backend_golang_server }}; 
 {% endfor %}
-{% else %}
-  server {{ app_name }}:9000;
-{% endif %}
 }
