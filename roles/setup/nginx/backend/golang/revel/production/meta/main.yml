@@ -1,4 +1,4 @@
 dependencies:
   - { role: common/golang/golang-defaults }
-  - { role: setup/nginx/backend-golang }
+  - { role: setup/nginx/backend/golang/revel/base }
   - { role: setup/nginx/app_log }

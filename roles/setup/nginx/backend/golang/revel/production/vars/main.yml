@@ -1,4 +1,4 @@
-nginx_root: "{{ gopath }}/bin/src/{{ app_name }}"
+nginx_root: "{{ gopath }}/bin/{{ app_name }}/src/{{ revel_package }}/public"
 nginx_location_confs:
   - "{{ app_name }}"
 nginx_backend_golang_servers:

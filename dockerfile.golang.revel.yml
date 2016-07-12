@@ -2,5 +2,5 @@
     - localhost
   connection: local
   roles:
-    - common/golang/package/revel
+    - common/golang/package/revel/install
     - common/supervisor/golang/revel

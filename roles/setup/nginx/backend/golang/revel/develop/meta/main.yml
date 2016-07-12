@@ -1,5 +1,5 @@
 dependencies:
-  - { role: setup/nginx/backend-golang }
+  - { role: setup/nginx/backend/golang/revel/base }
   - { role: setup/nginx/app_log }
   - { role: common/nginx/service/elasticsearch }
   - { role: common/nginx/service/kibana }

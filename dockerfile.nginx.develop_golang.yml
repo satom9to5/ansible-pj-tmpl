@@ -2,5 +2,5 @@
     - localhost
   connection: local
   roles:
-    - setup/nginx/develop-golang
+    - setup/nginx/backend/golang/revel/develop
     - common/supervisor/nginx
