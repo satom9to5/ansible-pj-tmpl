@@ -1,13 +1,7 @@
-{% if nginx_s3_upload_file_path != "" %}
-include /etc/nginx/conf.d/location/s3upload.conf;
-{% endif %}
-
 location / {
   try_files $uri $uri/ @{{ app_name }};
 }
 
 location @{{ app_name }} {
-  include /etc/nginx/conf.d/location/fileupload.conf;
-
   proxy_pass http://@upstream_{{ app_name }};
 }
