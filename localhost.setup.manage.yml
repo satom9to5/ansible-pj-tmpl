@@ -10,5 +10,6 @@
     - common/basic/mail
     - common/basic/system
     - common/vim
+    - common/sudoers/setting/add_secure_path
     - common/mysql/client
     - common/redis/install

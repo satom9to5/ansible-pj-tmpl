@@ -9,5 +9,6 @@
     - common/basic/system
     - common/vim
     - common/git/install
+    - common/sudoers/setting/add_secure_path
     - common/docker/engine
     - common/docker/compose
