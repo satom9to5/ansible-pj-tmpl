@@ -3,3 +3,4 @@
   roles:
     - common/docker/engine
     - common/docker/compose
+    - common/docker/machine
