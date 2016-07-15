@@ -3,3 +3,5 @@
   connection: local
   roles:
     - common/supervisor/postfix
+    - common/rsyslog/setting/docker
+    - common/supervisor/rsyslog
