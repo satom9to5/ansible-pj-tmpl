@@ -2,4 +2,4 @@
     - localhost
   connection: local
   roles:
-    - common/golang/package/goofys
+    - common/golang/package/goofys/install
