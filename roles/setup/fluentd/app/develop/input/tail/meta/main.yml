@@ -1,3 +1,0 @@
-dependencies:
-  - { role: common/fluentd/settings/golang/revel/input/tail, revel_log_path: "/var/log/{{ app_name }}" }
-  - { role: setup/fluentd/nginx/develop/input/tail, fluentd_tail_configs: "{{ fluentd_app_tail_configs }}", fluentd_filter_grep_configs : "{{ fluentd_develop_filter_grep_configs }}" }
