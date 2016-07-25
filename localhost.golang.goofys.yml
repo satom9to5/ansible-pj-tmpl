@@ -3,3 +3,4 @@
   connection: local
   roles:
     - common/golang/package/goofys/install
+    - common/golang/package/goofys/mount
