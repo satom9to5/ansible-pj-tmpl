@@ -78,7 +78,7 @@
     - name: create match forest s3 config
       set_fact:
         fact_match_forest_s3_config:
-          - tag_name: "{{ arg_app_name }}.{{ item.name }}_log"
+          - tag_name: "{{ arg_app_name }}.{{ item.name }}_log.**"
             s3_bucket: "{{ arg_s3_bucket }}"
             remove_prefix: "{{ arg_tag_prefix }}"
             time_slice_format: "{{ arg_match_s3_time_slice_format }}"

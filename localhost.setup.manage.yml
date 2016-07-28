@@ -13,3 +13,5 @@
     - common/sudoers/setting/add_secure_path
     - common/mysql/client
     - common/redis/install
+    - common/docker/engine
+    - common/docker/compose
