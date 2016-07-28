@@ -1,0 +1,52 @@
+- hosts:
+    - localhost
+  connection: local
+  vars:
+    # fluentd_settings_nginx_access_log_tag_name: nginx.access_log
+    # fluentd_settings_nginx_error_log_tag_name: nginx.error_log
+    - arg_tag_prefix: append
+      arg_s3_bucket: s3_test_bucket
+      arg_filter_record_transformer_records: 
+        - name: original_tag
+          value: "${tag}"
+      arg_filter_ec2_metadata_records:
+        - name: hostname
+          value: "${tagset_name}"
+        - name: instance_id
+          value: "${instance_id}"
+        - name: instance_type
+          value: "${instance_type}"
+      arg_match_record_recormer_output_tag: "{{ arg_tag_prefix }}.${original_tag}"
+      arg_match_s3_time_slice_format: "${tag_parts[0]}/${tag_parts[1]}/%Y/%m/%d/${tag_parts[2..-1]}.%Y%m%d-%H"
+      fluentd_config_filter_record_transformer_configs: 
+        - tag_name: "{{ fluentd_settings_nginx_access_log_tag_name }}"
+          records: "{{ arg_filter_record_transformer_records }}"
+        - tag_name: "{{ fluentd_settings_nginx_error_log_tag_name }}"
+          records: "{{ arg_filter_record_transformer_records }}"
+      fluentd_config_filter_ec2_metadata_configs:
+        - tag_name: "{{ fluentd_settings_nginx_access_log_tag_name }}"
+          records: "{{ arg_filter_ec2_metadata_records }}"
+        - tag_name: "{{ fluentd_settings_nginx_error_log_tag_name }}"
+          records: "{{ arg_filter_ec2_metadata_records }}"
+      fluentd_config_match_record_reformer_configs:
+        - tag_name: "{{ fluentd_settings_nginx_access_log_tag_name }}"
+          output_tag: "{{ arg_match_record_recormer_output_tag }}"
+        - tag_name: "{{ fluentd_settings_nginx_error_log_tag_name }}"
+          output_tag: "{{ arg_match_record_recormer_output_tag }}"
+      fluentd_config_match_forest_s3_configs:
+        - tag_name: "{{ arg_tag_prefix }}.{{ fluentd_settings_nginx_access_log_tag_name }}"
+          s3_bucket: "{{ arg_s3_bucket }}"
+          remove_prefix: "{{ arg_tag_prefix }}"
+          time_slice_format: "{{ arg_match_s3_time_slice_format }}"
+        - tag_name: "{{ arg_tag_prefix }}.{{ fluentd_settings_nginx_error_log_tag_name }}"
+          s3_bucket: "{{ arg_s3_bucket }}"
+          remove_prefix: "{{ arg_tag_prefix }}"
+          time_slice_format: "{{ arg_match_s3_time_slice_format }}"
+  roles:
+    - common/supervisor/fluentd
+    - common/fluentd/settings/nginx/source
+    - common/fluentd/settings/nginx/filter/grep
+    - common/fluentd/config/filter/record_transformer
+    - common/fluentd/config/filter/ec2_metadata
+    - common/fluentd/config/match/record_reformer
+    - common/fluentd/config/match/forest/subtype/s3

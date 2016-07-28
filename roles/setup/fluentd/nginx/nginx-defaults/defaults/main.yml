@@ -1,0 +1,3 @@
+fluentd_nginx_default_path_exclude_patterns:
+  - develop: (^/(elasticsearch|kibana)|\.(js|css|jpe?g|gif|png|svg)$)
+  - production: \.(js|css|jpe?g|gif|png|svg)$
