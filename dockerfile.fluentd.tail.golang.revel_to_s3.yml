@@ -1,0 +1,97 @@
+- hosts:
+    - localhost
+  connection: local
+  vars:
+    # fluentd_settings_nginx_access_log_tag_name: nginx.access_log
+    # fluentd_settings_nginx_error_log_tag_name: nginx.error_log
+    - arg_app_name: app_name
+      arg_tag_prefix: append
+      arg_s3_bucket: s3_test_bucket
+      arg_filter_record_transformer_records: 
+        - name: original_tag
+          value: "${tag}"
+      arg_filter_ec2_metadata_records:
+        - name: hostname
+          value: "${tagset_name}"
+        - name: instance_id
+          value: "${instance_id}"
+        - name: instance_type
+          value: "${instance_type}"
+      arg_match_record_recormer_output_tag: "{{ arg_tag_prefix }}.${original_tag}"
+      arg_match_s3_time_slice_format: "${tag_parts[0]}/${tag_parts[1]}/%Y/%m/%d/${tag_parts[2..-1]}.%Y%m%d-%H"
+      arg_revel_log_types:
+        - name: error
+      arg_revel_log_path_prefix: "{{ revel_log_path }}/{{ arg_app_name }}.*."
+      arg_revel_log_path_suffix: ".log"
+      arg_revel_log_default_format: ltsv
+      revel_log_path: "/var/log/{{ arg_app_name }}"
+  pre_tasks:
+    - name: create revel source tail config
+      set_fact:
+        fact_revel_source_tail_config:
+          - tag_name: "{{ arg_app_name }}.{{ item.name }}_log"
+            path: "{{ revel_log_path }}/{{ arg_app_name }}.*.{{ item.name }}.log"
+            format: "{{ item.format | default(arg_revel_log_default_format, true) }}"
+      register: fact_revel_source_tail_config_result
+      with_items: "{{ arg_revel_log_types }}"
+
+    - name: set_fact fluentd_setting_golang_package_revel_source_tail_configs
+      set_fact:
+        fluentd_setting_golang_package_revel_source_tail_configs: "{{ fact_revel_source_tail_config_result.results | map(attribute='ansible_facts.fact_revel_source_tail_config') | list }}"
+
+    - name: create filter record_transformer config
+      set_fact:
+        fact_filter_record_transformer_config:
+          - tag_name: "{{ arg_app_name }}.{{ item.name }}_log"
+            records: "{{ arg_filter_record_transformer_records }}"
+      register: fact_filter_record_transformer_config_result
+      with_items: "{{ arg_revel_log_types }}"
+
+    - name: set_fact fluentd_config_filter_record_transformer_configs
+      set_fact:
+        fluentd_config_filter_record_transformer_configs: "{{ fact_filter_record_transformer_config_result.results | map(attribute='ansible_facts.fact_filter_record_transformer_config') | list }}"
+
+    - name: create filter ec2_metadata config
+      set_fact:
+        fact_filter_ec2_metadata_config:
+          - tag_name: "{{ arg_app_name }}.{{ item.name }}_log"
+            records: "{{ arg_filter_ec2_metadata_records }}"
+      register: fact_filter_ec2_metadata_config_result
+      with_items: "{{ arg_revel_log_types }}"
+
+    - name: set_fact fluentd_config_filter_ec2_metadata_configs
+      set_fact:
+        fluentd_config_filter_ec2_metadata_configs: "{{ fact_filter_ec2_metadata_config_result.results | map(attribute='ansible_facts.fact_filter_ec2_metadata_config') | list }}"
+
+    - name: craete match record_reformer config
+      set_fact:
+        fact_match_record_reformer_config:
+          - tag_name: "{{ arg_app_name }}.{{ item.name }}_log"
+            output_tag: "{{ arg_match_record_recormer_output_tag }}"
+      register: fact_match_record_reformer_config_result
+      with_items: "{{ arg_revel_log_types }}"
+
+    - name: set_fact fluentd_config_match_record_reformer_configs
+      set_fact:
+        fluentd_config_match_record_reformer_configs: "{{ fact_match_record_reformer_config_result.results | map(attribute='ansible_facts.fact_match_record_reformer_config') | list }}"
+
+    - name: create match forest s3 config
+      set_fact:
+        fact_match_forest_s3_config:
+          - tag_name: "{{ arg_app_name }}.{{ item.name }}_log"
+            s3_bucket: "{{ arg_s3_bucket }}"
+            remove_prefix: "{{ arg_tag_prefix }}"
+            time_slice_format: "{{ arg_match_s3_time_slice_format }}"
+      register: fact_match_forest_s3_config_result
+      with_items: "{{ arg_revel_log_types }}"
+
+    - name: set_fact fluentd_config_match_forest_s3_configs
+      set_fact:
+        fluentd_config_match_forest_s3_configs: "{{ fact_match_forest_s3_config_result.results | map(attribute='ansible_facts.fact_match_forest_s3_config') | list }}"
+  roles:
+   - common/supervisor/fluentd
+   - common/fluentd/settings/golang/package/revel/source/tail
+   - common/fluentd/config/filter/record_transformer
+   - common/fluentd/config/filter/ec2_metadata
+   - common/fluentd/config/match/record_reformer
+   - common/fluentd/config/match/forest/subtype/s3
