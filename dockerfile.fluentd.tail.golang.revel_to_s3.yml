@@ -19,6 +19,7 @@
           value: "${instance_type}"
       arg_match_record_recormer_output_tag: "{{ arg_tag_prefix }}.${original_tag}"
       arg_match_s3_time_slice_format: "${tag_parts[0]}/${tag_parts[1]}/%Y/%m/%d/${tag_parts[2..-1]}.%Y%m%d-%H"
+      arg_shell_read_env_run_target_file: ""
       arg_revel_log_types:
         - name: error
       arg_revel_log_path_prefix: "{{ revel_log_path }}/{{ arg_app_name }}.*."
@@ -26,6 +27,11 @@
       arg_revel_log_default_format: ltsv
       revel_log_path: "/var/log/{{ arg_app_name }}"
   pre_tasks:
+    - name: set shell_read_env_run_target_file
+      when: arg_shell_read_env_run_target_file != ""
+      set_fact:
+        shell_read_env_run_target_file: "{{ arg_shell_read_env_run_target_file }}"
+
     - name: create revel source tail config
       set_fact:
         fact_revel_source_tail_config:
@@ -90,9 +96,11 @@
       set_fact:
         fluentd_config_match_forest_s3_configs: "{{ fact_match_forest_s3_config_result.results | map(attribute='ansible_facts.fact_match_forest_s3_config') | list }}"
   roles:
-   - common/supervisor/fluentd
-   - common/fluentd/settings/golang/package/revel/source/tail
-   - common/fluentd/config/filter/ec2_metadata
-   - common/fluentd/config/filter/record_transformer
-   - common/fluentd/config/match/record_reformer
-   - common/fluentd/config/match/forest/subtype/s3
+    - common/supervisor/fluentd
+    - common/fluentd/settings/golang/package/revel/source/tail
+    - common/fluentd/config/filter/ec2_metadata
+    - common/fluentd/config/filter/record_transformer
+    - common/fluentd/config/match/record_reformer
+    - common/fluentd/config/match/forest/subtype/s3
+    - role: common/shell/read_env_run
+      when: arg_shell_read_env_run_target_file != ""

@@ -18,6 +18,7 @@
           value: "${instance_type}"
       arg_match_record_recormer_output_tag: "{{ arg_tag_prefix }}.${original_tag}"
       arg_match_s3_time_slice_format: "${tag_parts[0]}/${tag_parts[1]}/%Y/%m/%d/${tag_parts[2..-1]}.%Y%m%d-%H"
+      arg_shell_read_env_run_target_file: ""
       fluentd_config_filter_record_transformer_configs: 
         - tag_name: "{{ fluentd_settings_nginx_access_log_tag_name }}"
           records: "{{ arg_filter_record_transformer_records }}"
@@ -44,6 +45,11 @@
           s3_bucket: "{{ arg_s3_bucket }}"
           remove_prefix: "{{ arg_tag_prefix }}"
           time_slice_format: "{{ arg_match_s3_time_slice_format }}"
+  pre_tasks:
+    - name: set shell_read_env_run_target_file
+      when: arg_shell_read_env_run_target_file != ""
+      set_fact:
+        shell_read_env_run_target_file: "{{ arg_shell_read_env_run_target_file }}"
   roles:
     - common/supervisor/fluentd
     - common/fluentd/settings/nginx/source
@@ -52,3 +58,5 @@
     - common/fluentd/config/filter/record_transformer
     - common/fluentd/config/match/record_reformer
     - common/fluentd/config/match/forest/subtype/s3
+    - role: common/shell/read_env_run
+      when: arg_shell_read_env_run_target_file != ""
