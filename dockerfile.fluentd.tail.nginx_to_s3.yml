@@ -54,8 +54,8 @@
     - common/supervisor/fluentd
     - common/fluentd/settings/nginx/source
     - common/fluentd/settings/nginx/filter/grep
-    - common/fluentd/config/filter/ec2_metadata
     - common/fluentd/config/filter/record_transformer
+    - common/fluentd/config/filter/ec2_metadata
     - common/fluentd/config/match/record_reformer
     - common/fluentd/config/match/forest/subtype/s3
     - role: common/shell/read_env_run

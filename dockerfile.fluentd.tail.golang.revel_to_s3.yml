@@ -98,8 +98,8 @@
   roles:
     - common/supervisor/fluentd
     - common/fluentd/settings/golang/package/revel/source/tail
-    - common/fluentd/config/filter/ec2_metadata
     - common/fluentd/config/filter/record_transformer
+    - common/fluentd/config/filter/ec2_metadata
     - common/fluentd/config/match/record_reformer
     - common/fluentd/config/match/forest/subtype/s3
     - role: common/shell/read_env_run
