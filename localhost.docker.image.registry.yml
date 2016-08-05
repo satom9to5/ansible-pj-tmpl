@@ -6,11 +6,7 @@
       docker_run_compose_shell_directory: "{{ docker_image_registry_directory }}"
       docker_image_registry_environment_settings: 
         - environment: localhost
-          env_files:
-            - "{{ docker_image_registry_directory }}/localhost.env"
         - environment: production
-          env_files:
-            - "{{ docker_image_registry_directory }}/production.env"
   pre_tasks:
     - name: set docker_run_compose_shell_environment
       set_fact:
