@@ -1,0 +1,25 @@
+- hosts:
+    - localhost
+  connection: local
+  vars:
+    - docker_image_registry_host_port: 80
+      docker_run_compose_shell_directory: "{{ docker_image_registry_directory }}"
+      docker_image_registry_environment_settings: 
+        - environment: localhost
+          env_files:
+            - "{{ docker_image_registry_directory }}/localhost.env"
+        - environment: production
+          env_files:
+            - "{{ docker_image_registry_directory }}/production.env"
+  pre_tasks:
+    - name: set docker_run_compose_shell_environment
+      set_fact:
+        fact_docker_run_compose_shell_environment: "{{ item.environment }}"
+      register: docker_run_compose_shell_environment_result
+      with_items: "{{ docker_image_registry_environment_settings }}"
+
+    - name: create docker_run_compose_shell_environments
+      set_fact:
+        docker_run_compose_shell_environments: "{{ docker_run_compose_shell_environment_result.results | map(attribute='ansible_facts.fact_docker_run_compose_shell_environment') | list }}"
+  roles:
+    - common/docker/image/registry
