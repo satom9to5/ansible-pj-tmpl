@@ -6,6 +6,9 @@
     arg_admin_name: test_admin
     arg_admin_location: "{{ arg_admin_name }}"
     arg_admin_host: localhost
+    arg_admin_root: "/var/www/{{ arg_admin_name }}"
+    arg_elasticsearch_host: localhost
+    arg_kibana_host: localhost
     # Custom Vars
     nginx_root: "/var/www/{{ arg_app_name }}"
     nginx_location_confs:
@@ -25,7 +28,9 @@
       nginx_config_rewrite_proxy_location: "/{{ arg_admin_location }}"
       nginx_config_rewrite_proxy_host: "{{ arg_admin_host }}"
       nginx_config_rewrite_proxy_port: 9000
-      nginx_config_rewrite_proxy_root: "/var/www/{{ arg_admin_name }}"
-    - common/nginx/backend/elasticsearch
-    - common/nginx/backend/kibana
+      nginx_config_rewrite_proxy_root: "{{ arg_admin_root }}"
+    - role: common/nginx/backend/elasticsearch
+      nginx_config_rewrite_proxy_host: "{{ arg_elasticsearch_host }}"
+    - role: common/nginx/backend/kibana
+      nginx_config_rewrite_proxy_host: "{{ arg_kibana_host }}"
     - common/supervisor/nginx
