@@ -1,7 +1,0 @@
-- hosts:
-    - localhost
-  connection: local
-  roles:
-    - setup/nginx/backend/golang/revel/production
-    - common/supervisor/nginx
-

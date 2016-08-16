@@ -1,0 +1,19 @@
+- hosts:
+    - localhost
+  connection: local
+  vars:
+    arg_app_name: test_app
+    arg_gopath: /go
+    arg_revel_package: github.com/test
+    # Custom Vars
+    nginx_root: "{{ gopath }}/bin/{{ arg_app_name }}/src/{{ arg_revel_package }}/public"
+    nginx_location_confs:
+      - "{{ arg_app_name }}"
+    nginx_config_proxy_config_name: "{{ arg_app_name }}"
+    nginx_config_proxy_servers:
+      - "unix:/{{ arg_gopath }}/bin/{{ arg_app_name }}/socket/{{ arg_app_name }}.sock"
+  roles:
+    - common/golang/golang-defaults
+    - common/nginx/config/proxy
+    - common/supervisor/nginx
+
