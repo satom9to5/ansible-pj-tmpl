@@ -16,7 +16,7 @@
       - kibana
       - "{{ arg_admin_name }}"
       - "{{ arg_app_name }}"
-    nginx_sendfile: off
+    nginx_sendfile: "off"
   roles:
     #- setup/nginx/backend/golang/revel/develop
     - role: common/nginx/config/proxy
