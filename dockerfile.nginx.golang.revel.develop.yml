@@ -4,7 +4,7 @@
   vars:
     arg_app_name: test_app
     arg_admin_name: test_admin
-    arg_admin_location: "{{ arg_admin_name }}"
+    arg_admin_location: "/{{ arg_admin_name }}"
     arg_admin_host: localhost
     arg_admin_root: "/var/www/{{ arg_admin_name }}"
     arg_elasticsearch_host: localhost
@@ -26,11 +26,14 @@
       - "{{ arg_app_name }}:9000"
     - role: common/nginx/config/rewrite_proxy
       nginx_config_rewrite_proxy_config_name: "{{ arg_admin_name }}"
+      nginx_config_rewrite_proxy_location: "{{ arg_admin_location }}"
       nginx_config_rewrite_proxy_host: "{{ arg_admin_host }}"
       nginx_config_rewrite_proxy_port: 9000
       nginx_config_rewrite_proxy_root: "{{ arg_admin_root }}"
     - role: common/nginx/backend/elasticsearch
-      nginx_config_rewrite_proxy_host: "{{ arg_elasticsearch_host }}"
+      nginx_backend_elasticsearch_config_name: elasticsearch
+      nginx_backend_elasticsearch_host: "{{ arg_elasticsearch_host }}"
     - role: common/nginx/backend/kibana
-      nginx_config_rewrite_proxy_host: "{{ arg_kibana_host }}"
+      nginx_backend_kibana_config_name: kibana
+      nginx_backend_kibana_host: "{{ arg_kibana_host }}"
     - common/supervisor/nginx
