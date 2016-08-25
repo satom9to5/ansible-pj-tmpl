@@ -3,17 +3,15 @@
   connection: local
   vars:
     arg_app_name: test_app
-    arg_gopath: /go
-    arg_revel_package: github.com/test
     # Custom Vars
-    nginx_root: "{{ gopath }}/bin/{{ arg_app_name }}/src/{{ arg_revel_package }}/public"
+    nginx_root: "/var/www/{{ arg_app_name }}"
     nginx_location_confs:
       - "{{ arg_app_name }}"
+    nginx_sendfile: "off"
   roles:
-    - common/golang/golang-defaults
     - role: common/nginx/config/proxy
+      nginx_config_proxy_root: "{{ nginx_root }}"
       nginx_config_proxy_config_name: "{{ arg_app_name }}"
       nginx_config_proxy_servers:
-        - "unix:/{{ arg_gopath }}/bin/{{ arg_app_name }}/socket/{{ arg_app_name }}.sock"
+      - "{{ arg_app_name }}:9000"
     - common/supervisor/nginx
-
