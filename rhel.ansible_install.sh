@@ -2,7 +2,7 @@
 
 set -e
 
-ANSIBLE_VERSION=2.1.0.0
+ANSIBLE_VERSION=2.1.1.0
 ANSIBLE_FULLNAME=ansible-${ANSIBLE_VERSION}
 
 SHELL_DIR=$(cd $(dirname $0) && pwd)
