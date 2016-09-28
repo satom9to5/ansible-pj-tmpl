@@ -10,30 +10,34 @@
     arg_elasticsearch_host: localhost
     arg_kibana_host: localhost
     # Custom Vars
+    nginx_install: false
     nginx_root: "/var/www/{{ arg_app_name }}"
-    nginx_location_confs:
-      - elasticsearch
-      - kibana
-      - "{{ arg_admin_name }}"
-      - "{{ arg_app_name }}"
     nginx_sendfile: "off"
+    nginx__server_confs:
+      - name: ''
+        locations:
+          - elasticsearch
+          - kibana
+          - "{{ arg_admin_name }}"
+          - "{{ arg_app_name }}"
   roles:
-    #- setup/nginx/backend/golang/revel/develop
+    - role: common/supervisor/nginx
+      when: "{{ nginx_install | bool }}"
+    - role: common/nginx/config/server
     - role: common/nginx/config/proxy
-      nginx_config_proxy_root: "{{ nginx_root }}"
-      nginx_config_proxy_config_name: "{{ arg_app_name }}"
-      nginx_config_proxy_servers:
-      - "{{ arg_app_name }}:9000"
+      nginx_config_proxy__root: "{{ nginx_root }}"
+      nginx_config_proxy__config_name: "{{ arg_app_name }}"
+      nginx_config_proxy__servers:
+        - "{{ arg_app_name }}:9000"
     - role: common/nginx/config/rewrite_proxy
-      nginx_config_rewrite_proxy_config_name: "{{ arg_admin_name }}"
-      nginx_config_rewrite_proxy_location: "{{ arg_admin_location }}"
-      nginx_config_rewrite_proxy_host: "{{ arg_admin_host }}"
-      nginx_config_rewrite_proxy_port: 9000
-      nginx_config_rewrite_proxy_root: "{{ arg_admin_root }}"
+      nginx_config_rewrite_proxy__config_name: "{{ arg_admin_name }}"
+      nginx_config_rewrite_proxy__location: "{{ arg_admin_location }}"
+      nginx_config_rewrite_proxy__host: "{{ arg_admin_host }}"
+      nginx_config_rewrite_proxy__port: 9000
+      nginx_config_rewrite_proxy__root: "{{ arg_admin_root }}"
     - role: common/nginx/backend/elasticsearch
       nginx_backend_elasticsearch_config_name: elasticsearch
       nginx_backend_elasticsearch_host: "{{ arg_elasticsearch_host }}"
     - role: common/nginx/backend/kibana
       nginx_backend_kibana_config_name: kibana
       nginx_backend_kibana_host: "{{ arg_kibana_host }}"
-    - common/supervisor/nginx
