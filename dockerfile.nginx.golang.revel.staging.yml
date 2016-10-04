@@ -2,9 +2,8 @@
     - localhost
   connection: local
   vars:
-    arg__app_name: test_app
-    arg__www_name: test_www
     arg__www_server_name: "www.{{ arg__www_name }}.local"
+    arg__app_name: test_app
     # Custom Vars
     nginx_install: false
     nginx_root: "/var/www/{{ arg__app_name }}"
@@ -13,9 +12,6 @@
       - name: ''
         locations:
           - "{{ arg__app_name }}"
-      - name: "{{ arg__www_server_name }}"
-        locations:
-          - "{{ arg__www_name }}"
   roles:
     - role: common/nginx/config/server
     - role: common/nginx/config/proxy
@@ -23,10 +19,4 @@
       nginx_config_proxy__root: "{{ nginx_root }}"
       nginx_config_proxy__servers:
       - "{{ arg__app_name }}:9000"
-    - role: common/nginx/config/proxy
-      nginx_config_proxy__config_name: "{{ arg__www_name }}"
-      nginx_config_proxy__root: "{{ nginx_root }}"
-      nginx_config_proxy__proxy_pass: "{{ nginx__default_proxy_protocol }}://{{ nginx_config_proxy__upstream }}/app$uri$is_args$query_string"
-      nginx_config_proxy__servers:
-        - "{{ arg__app_name }}:9000"
-    - common/supervisor/nginx
+    - role: common/supervisor/nginx
