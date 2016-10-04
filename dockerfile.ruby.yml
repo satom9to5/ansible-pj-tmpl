@@ -1,0 +1,8 @@
+- hosts:
+    - localhost
+  connection: local
+  roles:
+    - role: common/ruby/install
+      when: "{{ ruby__install | bool }}"
+    - role: common/ruby/gem/install
+      gem__package: bundler
