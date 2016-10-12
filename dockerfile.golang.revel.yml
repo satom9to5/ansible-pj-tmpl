@@ -4,6 +4,8 @@
   vars:
     # Arguments
     Arg__gopath: ""
+    # Defined Vars
+    supervisor_revel_umask_env: true
   roles:
     - role: common/golang/package/revel/revel-defaults
     - role: common/golang/package/install
