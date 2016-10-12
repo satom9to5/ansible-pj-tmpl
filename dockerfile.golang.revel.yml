@@ -3,7 +3,7 @@
   connection: local
   vars:
     # Arguments
-    Arg__gopath: ""
+    Arg__gopath: "{{ Default__golang_gopath }}"
     # Defined Vars
     supervisor_revel_umask_env: true
   roles:
@@ -11,5 +11,5 @@
     - role: common/golang/package/install
       when: "{{ golang__install | bool }} == true"
       golang__packages: "{{ golang_package_revel__packages }}"
-      golang__gopath: "{{ Arg__gopath | default(golang__gopath, true) }}"
+      golang__gopath: "{{ Arg__gopath | default(Default__golang_gopath, true) }}"
     - role: common/supervisor/golang/revel
