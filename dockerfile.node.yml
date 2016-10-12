@@ -3,4 +3,4 @@
   connection: local
   roles:
     - role: common/node/install
-      when: "{{ node__install | bool }}"
+      when: "{{ node__install | bool }} == true"

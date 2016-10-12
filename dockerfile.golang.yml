@@ -5,9 +5,6 @@
     # Arguments
     Arg__gopath: ""
   roles:
-    - role: common/golang/package/revel/revel-defaults
-    - role: common/golang/package/install
+    - role: common/golang/install
       when: "{{ golang__install | bool }} == true"
-      golang__packages: "{{ golang_package_revel__packages }}"
       golang__gopath: "{{ Arg__gopath | default(golang__gopath, true) }}"
-    - role: common/supervisor/golang/revel
