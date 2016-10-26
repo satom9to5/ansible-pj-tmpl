@@ -7,3 +7,4 @@
     - role: common/node/install
       when: "{{ node__install | bool }} == true"
     - role: common/ruby/gem/packages/rails
+      ruby_gem_packages_bundler__path: "/bundle"

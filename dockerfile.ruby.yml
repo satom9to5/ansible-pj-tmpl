@@ -4,5 +4,4 @@
   roles:
     - role: common/ruby/install
       when: "{{ ruby__install | bool }} == true"
-    - role: common/ruby/gem/install
-      gem__package: bundler
+    - role: common/ruby/gem/packages/bundler
