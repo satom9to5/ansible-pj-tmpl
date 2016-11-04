@@ -2,5 +2,6 @@
     - localhost
   roles:
     - common/docker/engine
+    - common/docker/add_group
     - common/docker/compose
     - common/docker/machine
