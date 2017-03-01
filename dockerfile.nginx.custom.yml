@@ -1,0 +1,6 @@
+- hosts:
+    - localhost
+  connection: local
+  roles:
+    - role: common/supervisor/nginx
+    - role: common/nginx/config/custom
