@@ -1,0 +1,9 @@
+- hosts:
+    - localhost
+  connection: local
+  vars:
+    embulk__plugins:
+      - embulk-input-jdbc
+      - embulk-output-jdbc
+  roles:
+    - role: common/embulk/plugins
