@@ -7,7 +7,7 @@
     # Defined Vars
     supervisor_revel_umask_env: true
   roles:
-    - role: common/golang/package/revel/revel-defaults
+    - role: common/golang/package/revel/default
     - role: common/golang/package/install
       when: "{{ golang__install | bool }} == true"
       golang__packages: "{{ golang_package_revel__packages }}"
