@@ -1,0 +1,11 @@
+- hosts:
+    - localhost
+  connection: local
+  vars:
+    nginx__user: "{{ ansible_user }}"
+    nginx__user_uid: "{{ ansible_user_uid }}"
+    nginx__group: "{{ ansible_user }}"
+    nginx__pidfile_dir: /opt/nginx/run 
+    nginx__lock_dir: /opt/nginx/lock 
+  roles:
+    - role: common/supervisor/nginx
