@@ -2,7 +2,7 @@
 
 set -e
 
-ANSIBLE_VERSION=2.1.1.0
+ANSIBLE_VERSION=2.4.1.0
 ANSIBLE_FULLNAME=ansible-${ANSIBLE_VERSION}
 
 SHELL_DIR=$(cd $(dirname $0) && pwd)
@@ -20,5 +20,5 @@ if [ ! `which pip` ]; then
     ${SUDO} pip install --upgrade pip setuptools
 fi
 ${SUDO} yum install -y libffi-devel openssl-devel 
-pip install /tmp/${ANSIBLE_FULLNAME}
-rm -rf /tmp/${ANSIBLE_FULLNAME}*
+${SUDO} pip install /tmp/${ANSIBLE_FULLNAME}
+${SUDO} rm -rf /tmp/${ANSIBLE_FULLNAME}*
