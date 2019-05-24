@@ -2,6 +2,6 @@
     - localhost
   connection: local
   roles:
-    #- common/aws/awscli 
+    - common/aws/awscli 
     #- common/aws/awslogs 
-    - common/aws/ecs-cli 
+    #- common/aws/ecs-cli 
