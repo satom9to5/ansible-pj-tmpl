@@ -2,6 +2,4 @@
     - localhost
   roles:
     - common/docker/ce
-      #- common/docker/add_group
     - common/docker/compose
-      #- common/docker/machine
